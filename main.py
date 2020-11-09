@@ -6,6 +6,7 @@ funcionarios = [{
 categorias = []
 tematicas = []
 estoque = []
+reservaTitulos = []
 
 def cadastrarNovoLivro(livro, ano, categoriaId, tematicaId, quantidade):
     global livros
@@ -46,9 +47,9 @@ def adicionarQuantidadeLivro(nome, quantidade):
         if l.get('nome') == nome:
             l['quantidade'] = l.get('quantidade') + quantidade
 #
-# def addTitulo():
+# def addTituloReserva():
 #
-# def attQntTitulo():
+# def adcQntTitulo():
 #
 # def removerTitulo():
 #
