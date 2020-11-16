@@ -46,13 +46,24 @@ def adicionarQuantidadeLivro(nome, quantidade):
     for l in livros:
         if l.get('nome') == nome:
             l['quantidade'] = l.get('quantidade') + quantidade
-#
-# def addTituloReserva():
-#
+
+def addTituloReserva(nome, reservado):
+    global livros
+    for l in livros:
+        if l.get('nome') == nome:
+            if (reservado):
+                l['reservado'] = 1
+            else:
+                l['reservado'] = 0
+
 # def adcQntTitulo():
 #
-# def removerTitulo():
-#
+def removerTitulo(nome):
+    global livros
+    for l in livros:
+        if l.get('nome') == nome:
+            livros.remove(l)
+
 # def buscarExemplar():
 #
 # def importarDados():
@@ -91,11 +102,8 @@ if __name__ == '__main__':
     cadastrarNovoLivro('Awew', '2020', 2, 2, 3)
     cadastrarNovoLivro('TT', '2030', 2, 3, 2)
 
-
-    print(livros)
-
-    adicionarQuantidadeLivro('Teste', 3)
-
+    removerTitulo('Mamãe Falei')
+    addTituloReserva('Olavo', 1)
     print(livros)
 
     # login = input('Qual seu login? ')
