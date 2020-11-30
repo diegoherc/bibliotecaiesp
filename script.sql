@@ -1,27 +1,33 @@
 CREATE TABLE biblioteca.livros (
-	id BIGINT auto_increment NOT NULL,
+	id INT NOT NULL auto_increment,
 	nome TEXT NULL,
 	ano VARCHAR(5) NULL,
 	reservado INT NULL,
-	categoriaId BIGINT NULL,
-	tematicaId BIGINT NULL,
-	quantidade BIGINT NULL,
-    quantidadeReservada BIGINT NULL,
+	categoriaId INT NULL,
+	tematicaId INT NULL,
+	quantidade INT NULL,
+    quantidadeReservada INT NULL,
 	PRIMARY KEY (id)
-)
+);
 CREATE TABLE biblioteca.categorias (
-	id BIGINT auto_increment NOT NULL,
+	id INT NOT NULL auto_increment,
 	nome TEXT NULL,
 	PRIMARY KEY (id)
-)
+);
 CREATE TABLE biblioteca.tematicas (
-	id BIGINT auto_increment NOT NULL,
+	id INT NOT NULL auto_increment,
 	nome TEXT NULL,
 	PRIMARY KEY (id)
-)
+);
 CREATE TABLE biblioteca.reservas (
-	id BIGINT auto_increment NOT NULL,
+	id INT NOT NULL auto_increment,
 	nomePessoa TEXT NULL,
     idLivro INT NULL,
 	PRIMARY KEY (id)
-)
+);
+CREATE TABLE biblioteca.usuarios (
+	id INT NOT NULL auto_increment,
+	login TEXT NULL,
+    senha INT NULL,
+	PRIMARY KEY (id)
+);

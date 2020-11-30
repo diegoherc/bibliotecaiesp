@@ -1,8 +1,21 @@
 import mysql.connector
 
-mydb = mysql.connector.connect(user='root', password='123',
+mydb = mysql.connector.connect(user='root', password='diego123',
                               host='127.0.0.1',
                               database='biblioteca')
+
+def login(login, senha):
+    myCursor = mydb.cursor()
+    myCursor.execute("SELECT senha FROM usuarios WHERE login = %s", (login,))
+    myresult = myCursor.fetchone()
+    if myresult:
+        if (str(myresult[0]) == str(senha)):
+            return 'pass'
+        else:
+            print('Senha errada')
+    else:
+            print('Usuário não existe')
+    return ''
 
 def cadastrarNovoLivro(livro, ano, categoriaId, tematicaId, quantidade):
     myCursor = mydb.cursor()
@@ -39,13 +52,12 @@ def adicionarQuantidadeLivro(nome, quantidade):
         myresult = myresult[0][0] + int(quantidade)
     print(myresult)
     myCursor.close()
-
     myCursor = mydb.cursor()
     myCursor.execute("UPDATE livros SET quantidade = %s WHERE nome = %s", (myresult, nome))
     mydb.commit()
     print(myCursor.rowcount, " record inserted")
     myCursor.close()
-                
+
 def addTituloReserva(nome, reservado):
     myCursor = mydb.cursor()
     myCursor.execute("UPDATE livros SET reservado = %s WHERE nome = %s", (reservado, nome))
@@ -84,55 +96,41 @@ def adicionarReserva(nomePessoa, idLivro):
     print(myCursor.rowcount, " record inserted")
     myCursor.close()
 
+def gerarRelatorioLivros():
+    myCursor = mydb.cursor()
+    myCursor.execute("SELECT * FROM livros")
+    myresult = myCursor.fetchall()
+    if myresult:
+        for livro in myresult:
+            print(livro)
+    else:
+        print('Nenhum livro cadastrado')
+        
+def gerarRelatorioCategoria():
+    myCursor = mydb.cursor()
+    myCursor.execute("SELECT * FROM categorias")
+    myresult = myCursor.fetchall()
+    if myresult:
+        for categoria in myresult:
+            print(categoria)
+    else:
+        print('Nenhuma categoria cadastrada')
+        
+def gerarRelatorioTematica():
+    myCursor = mydb.cursor()
+    myCursor.execute("SELECT * FROM tematicas")
+    myresult = myCursor.fetchall()
+    if myresult:
+        for tematica in myresult:
+            print(tematica)
+    else:
+        print('Nenhuma categoria cadastrada')
 
-
-# def adcQntTitulo():
-#
-# def buscarExemplar():
-#
-# def importarDados():
-#
-# def obterStatus(livro):
-#
-# def gerarRelatorio():
-#
-# def gerarRelatorioCategoria():
-#
-# def gerarRelatorioTematica():
-
-
-if __name__ == '__main__':
-    adicionarReserva('Marcos', 1)
-
-    # cadastrarNovoLivro('Mamãe Falei', 2010, 2, 3, 1)
-    # cadastrarCategoria('Livro Didático')
-    # cadastrarCategoria('Enciclopédia')
-    # cadastrarCategoria('Dicionário')
-    # cadastrarCategoria('Revista Científica')
-    # cadastrarCategoria('História em quadrinhos')
-    # cadastrarTematica('Álgebra')
-    # cadastrarTematica('Gramática')
-    # cadastrarTematica('Biologia')
-
-    # print(categorias)
-    # print(tematicas)
-
-    # cadastrarNovoLivro('Mamãe Falei', '2010', 2, 3, 1)
-    # cadastrarNovoLivro('Olavo', '2010', 1, 2, 5)
-    # cadastrarNovoLivro('Teste', '2100', 1, 2, 3)
-    # cadastrarNovoLivro('Vars', '2020', 1, 1, 6)
-    # cadastrarNovoLivro('Awew', '2020', 2, 2, 3)
-    # cadastrarNovoLivro('TT', '2030', 2, 3, 2)
-
-    # removerTitulo('Mamãe Falei')
-    # addTituloReserva('Olavo', 1)
-    # print(livros)
-
-    # login = input('Qual seu login? ')
-    # senha = input('Qual sua senha? ')
-    # for f in funcionarios:
-    #     if (f.get('login') == login and f.get('senha') == senha):
-    #         print('Usuário logado')
-    #         main()
-    #     else:
-    #         print('Senha ou usuário errada')
+def buscarExemplar(livro):
+    myCursor = mydb.cursor()
+    myCursor.execute("SELECT * FROM livros WHERE nome = %s", (livro,))
+    myresult = myCursor.fetchone()
+    if myresult:
+        print(myresult)
+    else:
+        print('Exemplar não encontrado')
