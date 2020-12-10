@@ -77,9 +77,9 @@ def removerTitulo(nome):
 # def gerarRelatorioTematica():
 #
 def main():
-    cadastrarNovoLivro('Harry Potter', 'Viadagem', '1995', '1')
-    cadastrarNovoLivro('Crepusculo', 'Viadagem', '1924', '1')
-    cadastrarNovoLivro('A culpa é das estrelas', 'Viadagem', '9999', '1')
+    cadastrarNovoLivro('Harry Potter', 'Ficção', '1995', '1')
+    cadastrarNovoLivro('Crepusculo', 'Ficção', '1924', '1')
+    cadastrarNovoLivro('A culpa é das estrelas', 'Ficção', '9999', '1')
 
 if __name__ == '__main__':
     cadastrarCategoria('Livro Didático')
